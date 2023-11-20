@@ -1,0 +1,6 @@
+AddDefaultCharset UTF-8
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !\.(php|css|js|htc|png|gif|jpeg|jpg|ico|otf|eot|woff|woff2|ttf|map|hxd|json|mp4|webm|webp|txt|svg|webmanifest|xlsx|contextMenu.min.css.map|docx|doc|pdf|xml)$
+
+RewriteRule .* public/index.php [L]
