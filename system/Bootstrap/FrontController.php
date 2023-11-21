@@ -67,23 +67,33 @@ class FrontController{
             $this->request['r_type'] = "xmlhttp";
             
             // add $_GET information to request variable
-            if (isset($_GET) && !empty($_GET)){
+            if ((isset($_GET) && !empty($_GET)) || ($_SERVER['REQUEST_METHOD']==='GET')){
+
                 $this->request['r_xmlhttp_type'] = "get";
 
-                $this->request['r_name'] = $_GET['r_name'];
-                unset($_GET['r_name']);
+                // with params
+                if (!empty($_SERVER['QUERY_STRING'])){
+                    $this->request['r_name'] = strstr(substr($_SERVER['REQUEST_URI'], 1), "?", true);
+                    parse_str($_SERVER['QUERY_STRING'], $this->request['r_data']);
+                }
 
-                $this->request['r_data'] = $_GET;
+                // without params
+                else{
+                    $this->request['r_name'] = $_SERVER['REQUEST_URI'];
+                    $this->request['r_data'] = $_SERVER['QUERY_STRING'];
+                }
             }
 
             // add $_POST information to request variable
-            if (isset($_POST) && !empty($_POST)){
+            if ((isset($_POST) && !empty($_POST)) || ($_SERVER['REQUEST_METHOD']==='POST')){
                 $this->request['r_xmlhttp_type'] = "post";
 
-                $this->request['r_name'] = $_POST['r_name'];
-                unset($_POST['r_name']);
+                (empty($_POST)) ? $data = json_decode(file_get_contents('php://input'),true) : $data = $_POST;
 
-                $this->request['r_data'] = $_POST;
+                $this->request['r_name'] = $data['r_name'];
+                unset($data['r_name']);
+
+                $this->request['r_data'] = $data;
             }
         }
     }

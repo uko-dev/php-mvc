@@ -38,7 +38,7 @@ class HomeController extends BaseController{
     public function sendContactForm($r)
     {   
         echo "<pre>";
-        print_r($arr);
+        print_r($r);
         echo "</pre>";
         exit();
     }

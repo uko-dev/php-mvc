@@ -7,6 +7,19 @@
 
 /**
  *---------------------------------------------------------
+ * CORS CONFIG
+ *---------------------------------------------------------
+ *
+ * this code is optional, you can remove it if you don't need any CORS features
+ */
+header('Access-Control-Allow-Origin: https://yourdomain.com/');
+header('Access-Control-Allow-Methods: POST, GET');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') return 0; // ignoring the options request
+
+
+/**
+ *---------------------------------------------------------
  * NECESSARY FILES CONNECTION
  *---------------------------------------------------------
  *

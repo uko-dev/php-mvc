@@ -23,10 +23,6 @@ class BaseController extends PagesTemplates{
         // connect request controller
         require APP_DIR . "Controllers/" . $accessLevel . "/" . $controller;
 
-        // add page information to request array
-        $request['page_name_only'] = $request['http_paths'][0];
-        $request['page_with_params'] = $this->determinePageParams($request['http_paths']);
-
         // create request controller object
         $className     = str_replace(".php", "", $controller);
         $controllerObj = new $className;
@@ -34,6 +30,10 @@ class BaseController extends PagesTemplates{
         // run controller method for HTTP requests
         if ($request['r_type'] == "http")
         {
+            // add page information to request array
+            $request['page_name_only'] = $request['http_paths'][0];
+            $request['page_with_params'] = $this->determinePageParams($request['http_paths']);
+
             $pt = new PagesTemplates(); // create pages templates object
             $pt->initRequestInfo($request); // send request information to Pages Templates Model
             $controllerObj->$method($request, $pt); // run controller methos
