@@ -16,6 +16,7 @@ header('Access-Control-Allow-Origin: https://yourdomain.com/');
 header('Access-Control-Allow-Methods: POST, GET');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') return 0; // ignoring the options request
+// more information about purpose of the 18 string https://stackoverflow.com/questions/44479681/cors-php-response-to-preflight-request-doesnt-pass-am-allowing-origin
 
 
 /**
