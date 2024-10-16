@@ -17,7 +17,7 @@
                 ini_set("display_errors", 1);
 
                 // show array function
-                function showArr($arr){
+                function test($arr){
                     echo "<pre>";
                     print_r($arr);
                     echo "</pre>";
